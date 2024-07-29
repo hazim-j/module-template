@@ -64,8 +64,22 @@ contract ValidatorTemplateTest is RhinestoneModuleKit, Test {
         assertEq(target.balance, prevBalance + value);
     }
 
+    function testUninstall() public {
+        instance.uninstallModule({
+            moduleTypeId: MODULE_TYPE_VALIDATOR,
+            module: address(validator),
+            data: ""
+        });
+    }
+
     function testReinstall() public {
         instance.uninstallModule({
+            moduleTypeId: MODULE_TYPE_VALIDATOR,
+            module: address(validator),
+            data: ""
+        });
+
+        instance.installModule({
             moduleTypeId: MODULE_TYPE_VALIDATOR,
             module: address(validator),
             data: ""
