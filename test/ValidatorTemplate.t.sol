@@ -63,4 +63,26 @@ contract ValidatorTemplateTest is RhinestoneModuleKit, Test {
         // Check if the balance of the target has increased
         assertEq(target.balance, prevBalance + value);
     }
+
+    function testUninstall() public {
+        instance.uninstallModule({
+            moduleTypeId: MODULE_TYPE_VALIDATOR,
+            module: address(validator),
+            data: ""
+        });
+    }
+
+    function testReinstall() public {
+        instance.uninstallModule({
+            moduleTypeId: MODULE_TYPE_VALIDATOR,
+            module: address(validator),
+            data: ""
+        });
+
+        instance.installModule({
+            moduleTypeId: MODULE_TYPE_VALIDATOR,
+            module: address(validator),
+            data: ""
+        });
+    }
 }
